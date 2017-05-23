@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android.support.v7.cardview:cardBackgroundColor="@android:color/white"
-    android.support.v7.cardview:cardCornerRadius="3dp"
-    android.support.v7.cardview:cardElevation="5dp"
+    android.support.v7.cardview:cardCornerRadius="2dp"
+    android.support.v7.cardview:cardElevation="3dp"
     android.support.v7.cardview:cardUseCompatPadding="true"
     android.support.v7.cardview:contentPadding="10dp">
 
@@ -27,13 +27,21 @@
 
         <TextView
             android:id="@+id/person_date_of_birth"
+            style="@style/Base.TextAppearance.AppCompat.Body2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_below="@id/person_name"
-            style="@style/Base.TextAppearance.AppCompat.Body2"
-
             android:text="5/27/2017" />
+
+        <TextView
+            android:id="@+id/person_phone_number"
+            style="@style/Base.TextAppearance.AppCompat.Subhead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="5dp"
+            android:text="555-555-5555" />
 
         <TextView
             android:id="@+id/person_zip_code"
@@ -43,15 +51,6 @@
             android:layout_alignParentEnd="true"
             android:layout_below="@id/person_phone_number"
             android:text="55555" />
-
-        <TextView
-            android:id="@+id/person_phone_number"
-            style="@style/Base.TextAppearance.AppCompat.Body2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:text="555-555-5555" />
-
     </RelativeLayout>
 
 

@@ -8,18 +8,14 @@ import android.widget.TextView;
 
 import com.domain.codetest_jake_moritz.App;
 import com.domain.codetest_jake_moritz.R;
-import com.domain.codetest_jake_moritz.fragments.PersonFragment.OnListFragmentInteractionListener;
 import com.domain.codetest_jake_moritz.models.Person;
 
 import io.realm.RealmRecyclerViewAdapter;
 
 public class MyPersonRecyclerViewAdapter extends RealmRecyclerViewAdapter<Person, MyPersonRecyclerViewAdapter.ViewHolder> {
 
-    private final OnListFragmentInteractionListener mListener;
-
-    public MyPersonRecyclerViewAdapter(OnListFragmentInteractionListener listener) {
+    public MyPersonRecyclerViewAdapter() {
         super(App.getInstance().getRealm().where(Person.class).findAll(), true);
-        mListener = listener;
     }
 
     @Override
@@ -35,9 +31,14 @@ public class MyPersonRecyclerViewAdapter extends RealmRecyclerViewAdapter<Person
         holder.nameView.setText(holder.person.getFirstName() + " " + holder.person.getLastName());
         holder.phoneNumberView.setText(holder.person.getPhoneNumber());
         holder.zipCodeView.setText(holder.person.getZipCode());
-        holder.dateOfBirthView.setText(String.valueOf(holder.person.getDateOfBirth()));
+        holder.dateOfBirthView.setText(String.valueOf(holder.person.getDateOfBirthFormatted()));
 
-//        holder.mView.setOnClickListener(mListener);
+        holder.mView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // open dialog to edit Person info
+            }
+        });
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

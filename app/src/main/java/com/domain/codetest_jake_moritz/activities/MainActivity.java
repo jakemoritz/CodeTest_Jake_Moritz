@@ -6,9 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.domain.codetest_jake_moritz.R;
 import com.domain.codetest_jake_moritz.fragments.PersonFragment;
-import com.domain.codetest_jake_moritz.fragments.dummy.DummyContent;
 
-public class MainActivity extends AppCompatActivity implements PersonFragment.OnListFragmentInteractionListener{
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +22,4 @@ public class MainActivity extends AppCompatActivity implements PersonFragment.On
                 .commit();
     }
 
-    @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
-
-    }
 }

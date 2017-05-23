@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import com.domain.codetest_jake_moritz.App;
 import com.domain.codetest_jake_moritz.R;
-import com.domain.codetest_jake_moritz.fragments.dummy.DummyContent.DummyItem;
+import com.domain.codetest_jake_moritz.activities.MainActivity;
 import com.domain.codetest_jake_moritz.models.Person;
 
 import java.util.UUID;
@@ -24,7 +24,7 @@ public class PersonFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
 
     private int mColumnCount = 1;
-    private OnListFragmentInteractionListener mListener;
+    private MainActivity mainActivity;
 
     public PersonFragment() {
     }
@@ -59,7 +59,9 @@ public class PersonFragment extends Fragment {
                         person.setLastName("Smith");
                         person.setDateOfBirth(1495577645663L);
                         person.setPhoneNumber("555-555-5555");
-                        person.setZipCode("55555");
+
+                        int zipCode = (int) (Math.random() * 99999 + 10000);
+                        person.setZipCode(String.valueOf(zipCode));
                     }
                 });
             }
@@ -80,7 +82,7 @@ public class PersonFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyPersonRecyclerViewAdapter(mListener));
+            recyclerView.setAdapter(new MyPersonRecyclerViewAdapter());
         }
         return view;
     }
@@ -89,22 +91,15 @@ public class PersonFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnListFragmentInteractionListener");
+
+        if (context instanceof MainActivity){
+            mainActivity = (MainActivity) context;
         }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
-    }
-
-    public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        mainActivity = null;
     }
 }
