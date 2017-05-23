@@ -4,7 +4,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.domain.codetest_jake_moritz.App;
@@ -37,6 +36,8 @@ public class MyPersonRecyclerViewAdapter extends RealmRecyclerViewAdapter<Person
         holder.phoneNumberView.setText(holder.person.getPhoneNumber());
         holder.zipCodeView.setText(holder.person.getZipCode());
         holder.dateOfBirthView.setText(String.valueOf(holder.person.getDateOfBirth()));
+
+//        holder.mView.setOnClickListener(mListener);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -44,7 +45,7 @@ public class MyPersonRecyclerViewAdapter extends RealmRecyclerViewAdapter<Person
         public final TextView nameView;
         public final TextView phoneNumberView;
         public final TextView zipCodeView;
-        public final EditText dateOfBirthView;
+        public final TextView dateOfBirthView;
         public Person person;
 
         public ViewHolder(View view) {
@@ -53,7 +54,7 @@ public class MyPersonRecyclerViewAdapter extends RealmRecyclerViewAdapter<Person
             nameView = (TextView) view.findViewById(R.id.person_name);
             phoneNumberView = (TextView) view.findViewById(R.id.person_phone_number);
             zipCodeView = (TextView) view.findViewById(R.id.person_zip_code);
-            dateOfBirthView = (EditText) view.findViewById(R.id.person_date_of_birth);
+            dateOfBirthView = (TextView) view.findViewById(R.id.person_date_of_birth);
         }
     }
 }
