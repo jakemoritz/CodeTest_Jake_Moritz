@@ -1,7 +1,6 @@
 package com.domain.codetest_jake_moritz.activities;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import com.domain.codetest_jake_moritz.R;
@@ -18,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_main, personFragment)
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                .setTransition(android.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .commit();
     }
 

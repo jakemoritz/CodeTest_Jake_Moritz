@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import com.domain.codetest_jake_moritz.App;
 import com.domain.codetest_jake_moritz.R;
 import com.domain.codetest_jake_moritz.activities.MainActivity;
+import com.domain.codetest_jake_moritz.dialogs.NewPersonDialogFragment;
 import com.domain.codetest_jake_moritz.models.Person;
 
 import java.util.UUID;
@@ -36,6 +38,7 @@ public class PersonFragment extends Fragment {
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
+        fragment.setRetainInstance(true);
         return fragment;
     }
 
@@ -80,7 +83,7 @@ public class PersonFragment extends Fragment {
         addNewPersonFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                NewPersonDialogFragment.
             }
         });
 
@@ -94,6 +97,20 @@ public class PersonFragment extends Fragment {
         personRecyclerView.setAdapter(new MyPersonRecyclerViewAdapter());
 
         return view;
+    }
+
+    public void showDialog(){
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        Fragment previousFragment = getFragmentManager().findFragmentByTag("dialog");
+
+        if (previousFragment != null){
+            fragmentTransaction.remove(previousFragment);
+        }
+
+        fragmentTransaction.addToBackStack(null);
+
+        NewPersonDialogFragment newPersonDialogFragment = NewPersonDialogFragment.newInstance();
+        newPersonDialogFragment.show(fragmentTransaction, "dialog");
     }
 
 
