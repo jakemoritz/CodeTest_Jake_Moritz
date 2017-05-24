@@ -13,8 +13,6 @@
         android:name="com.domain.codetest_jake_moritz.fragments.PersonFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="6dp"
-        android:layout_marginRight="6dp"
         android:scrollbars="vertical"
         app:layoutManager="LinearLayoutManager"
         tools:context="com.domain.codetest_jake_moritz.fragments.PersonFragment"

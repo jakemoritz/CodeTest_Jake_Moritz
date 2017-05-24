@@ -5,6 +5,8 @@
     android:id="@+id/card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginLeft="6dp"
+    android:layout_marginRight="6dp"
     android.support.v7.cardview:cardBackgroundColor="@android:color/white"
     android.support.v7.cardview:cardCornerRadius="2dp"
     android.support.v7.cardview:cardElevation="3dp"
