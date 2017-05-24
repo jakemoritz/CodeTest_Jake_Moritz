@@ -83,7 +83,7 @@ public class PersonFragment extends Fragment {
         addNewPersonFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NewPersonDialogFragment.
+                showDialog();
             }
         });
 
@@ -109,7 +109,7 @@ public class PersonFragment extends Fragment {
 
         fragmentTransaction.addToBackStack(null);
 
-        NewPersonDialogFragment newPersonDialogFragment = NewPersonDialogFragment.newInstance();
+        NewPersonDialogFragment newPersonDialogFragment = NewPersonDialogFragment.newInstance(mainActivity);
         newPersonDialogFragment.show(fragmentTransaction, "dialog");
     }
 

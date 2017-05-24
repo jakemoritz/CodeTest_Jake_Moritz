@@ -2,25 +2,29 @@ package com.domain.codetest_jake_moritz.dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
+import android.support.v4.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
 import com.domain.codetest_jake_moritz.App;
+import com.domain.codetest_jake_moritz.activities.MainActivity;
 
 import io.realm.Realm;
 
 public class NewPersonDialogFragment extends DialogFragment {
 
-    public static NewPersonDialogFragment newInstance(){
+    private MainActivity mainActivity;
+
+    public static NewPersonDialogFragment newInstance(MainActivity mainActivity){
         NewPersonDialogFragment newPersonDialogFragment = new NewPersonDialogFragment();
         newPersonDialogFragment.setRetainInstance(true);
+        newPersonDialogFragment.mainActivity = mainActivity;
         return newPersonDialogFragment;
     }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(App.getInstance());
+        AlertDialog.Builder builder = new AlertDialog.Builder(mainActivity);
         builder.setTitle("Add a new person")
                 .setMessage("message")
                 .setPositiveButton("Add", new DialogInterface.OnClickListener() {
