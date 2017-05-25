@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import com.domain.codetest_jake_moritz.App;
 import com.domain.codetest_jake_moritz.R;
 import com.domain.codetest_jake_moritz.activities.MainActivity;
-import com.domain.codetest_jake_moritz.dialogs.NewPersonDialogFragment;
 import com.domain.codetest_jake_moritz.models.Person;
 
 import java.util.UUID;
@@ -83,7 +82,7 @@ public class PersonFragment extends Fragment {
         addNewPersonFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialog();
+                editPerson();
             }
         });
 
@@ -99,18 +98,15 @@ public class PersonFragment extends Fragment {
         return view;
     }
 
-    public void showDialog(){
+    public void editPerson(){
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        Fragment previousFragment = getFragmentManager().findFragmentByTag("dialog");
 
-        if (previousFragment != null){
-            fragmentTransaction.remove(previousFragment);
-        }
-
+        EditPersonFragment editPersonFragment = EditPersonFragment.newInstance();
+        fragmentTransaction.replace(R.id.content_main, editPersonFragment);
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         fragmentTransaction.addToBackStack(null);
 
-        NewPersonDialogFragment newPersonDialogFragment = NewPersonDialogFragment.newInstance(mainActivity);
-        newPersonDialogFragment.show(fragmentTransaction, "dialog");
+        fragmentTransaction.commit();
     }
 
 
