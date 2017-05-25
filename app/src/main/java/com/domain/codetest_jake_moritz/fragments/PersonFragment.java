@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -82,7 +83,7 @@ public class PersonFragment extends Fragment {
         addNewPersonFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editPerson();
+                modifyPerson(EditPersonFragment.MODE_ADD);
             }
         });
 
@@ -95,13 +96,17 @@ public class PersonFragment extends Fragment {
         }
         personRecyclerView.setAdapter(new MyPersonRecyclerViewAdapter());
 
+        ActionBar actionBar = mainActivity.getSupportActionBar();
+        actionBar.setTitle(App.getInstance().getApplicationName());
+        actionBar.setDisplayHomeAsUpEnabled(false);
+
         return view;
     }
 
-    public void editPerson(){
+    public void modifyPerson(String mode){
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 
-        EditPersonFragment editPersonFragment = EditPersonFragment.newInstance();
+        EditPersonFragment editPersonFragment = EditPersonFragment.newInstance(mode);
         fragmentTransaction.replace(R.id.content_main, editPersonFragment);
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         fragmentTransaction.addToBackStack(null);
