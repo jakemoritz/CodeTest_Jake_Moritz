@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.domain.codetest_jake_moritz.App;
@@ -14,8 +15,11 @@ import io.realm.RealmRecyclerViewAdapter;
 
 public class MyPersonRecyclerViewAdapter extends RealmRecyclerViewAdapter<Person, MyPersonRecyclerViewAdapter.ViewHolder> {
 
-    public MyPersonRecyclerViewAdapter() {
+    private PersonClickListener personClickListener;
+
+    public MyPersonRecyclerViewAdapter(PersonClickListener personClickListener) {
         super(App.getInstance().getRealm().where(Person.class).findAll(), true);
+        this.personClickListener = personClickListener;
     }
 
     @Override
@@ -57,5 +61,12 @@ public class MyPersonRecyclerViewAdapter extends RealmRecyclerViewAdapter<Person
             zipCodeView = (TextView) view.findViewById(R.id.person_zip_code);
             dateOfBirthView = (TextView) view.findViewById(R.id.person_date_of_birth);
         }
+    }
+
+
+
+    interface PersonClickListener extends AdapterView.OnItemClickListener{
+        @Override
+        void onItemClick(AdapterView<?> parent, View view, int position, long id);
     }
 }

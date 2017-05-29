@@ -13,6 +13,7 @@
         android:layout_marginBottom="25dp"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="15dp"
+        android:layout_marginRight="@dimen/new_text_view_margin_right"
         android:orientation="horizontal">
 
         <ImageView
@@ -28,6 +29,7 @@
             android:layout_height="match_parent"
             android:background="#00000000"
             android:hint="First name"
+            android:id="@+id/new_first_name_text"
             android:inputType="textPersonName" />
 
     </LinearLayout>
@@ -38,6 +40,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="25dp"
         android:layout_marginLeft="15dp"
+        android:layout_marginRight="@dimen/new_text_view_margin_right"
+
         android:layout_marginTop="15dp"
         android:orientation="horizontal">
 
@@ -54,16 +58,19 @@
             android:layout_height="match_parent"
             android:background="#00000000"
             android:hint="Last name"
+            android:id="@+id/new_last_name_text"
             android:inputType="textPersonName" />
 
     </LinearLayout>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/new_phone_name"
+        android:id="@+id/new_phone_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="25dp"
         android:layout_marginLeft="15dp"
+        android:layout_marginRight="@dimen/new_text_view_margin_right"
+
         android:layout_marginTop="15dp"
         android:orientation="horizontal">
 
@@ -79,6 +86,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#00000000"
+            android:id="@+id/new_phone_number_text"
             android:hint="Phone number"
             android:inputType="phone" />
 
@@ -91,6 +99,8 @@
         android:layout_marginBottom="25dp"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="15dp"
+        android:layout_marginRight="@dimen/new_text_view_margin_right"
+
         android:orientation="horizontal">
 
         <ImageView
@@ -106,15 +116,18 @@
             android:layout_height="match_parent"
             android:background="#00000000"
             android:hint="Zip code"
+            android:id="@+id/new_zip_code_text"
             android:inputType="number" />
 
     </LinearLayout>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/new_date_of_birth"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="25dp"
+        android:layout_marginRight="@dimen/new_text_view_margin_right"
+
         android:layout_marginLeft="15dp"
         android:layout_marginTop="15dp"
         android:orientation="horizontal">
@@ -128,7 +141,7 @@
 
         <TextView
             style="@style/Base.TextAppearance.AppCompat.Subhead"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/new_date_of_birth_text"
             android:background="#00000000"

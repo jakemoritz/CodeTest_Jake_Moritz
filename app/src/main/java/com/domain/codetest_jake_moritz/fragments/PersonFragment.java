@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import com.domain.codetest_jake_moritz.App;
 import com.domain.codetest_jake_moritz.R;
@@ -22,7 +23,7 @@ import java.util.UUID;
 
 import io.realm.Realm;
 
-public class PersonFragment extends Fragment {
+public class PersonFragment extends Fragment implements MyPersonRecyclerViewAdapter.PersonClickListener {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
 
@@ -73,6 +74,12 @@ public class PersonFragment extends Fragment {
     }
 
     @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Person person = (Person) parent.getItemAtPosition(position);
+        modifyPerson(person.getPersonID());
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_person_list, container, false);
@@ -80,10 +87,11 @@ public class PersonFragment extends Fragment {
         RecyclerView personRecyclerView = (RecyclerView) view.findViewById(R.id.list);
 
         FloatingActionButton addNewPersonFab = (FloatingActionButton) view.findViewById(R.id.new_person_fab);
+        final PersonFragment parentFragment = this;
         addNewPersonFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                modifyPerson(EditPersonFragment.MODE_ADD);
+                parentFragment.addPerson();
             }
         });
 
@@ -94,7 +102,7 @@ public class PersonFragment extends Fragment {
         } else {
             personRecyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
-        personRecyclerView.setAdapter(new MyPersonRecyclerViewAdapter());
+        personRecyclerView.setAdapter(new MyPersonRecyclerViewAdapter(this));
 
         ActionBar actionBar = mainActivity.getSupportActionBar();
         actionBar.setTitle(App.getInstance().getApplicationName());
@@ -103,10 +111,21 @@ public class PersonFragment extends Fragment {
         return view;
     }
 
-    public void modifyPerson(String mode){
+    private void addPerson(){
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 
-        EditPersonFragment editPersonFragment = EditPersonFragment.newInstance(mode);
+        EditPersonFragment editPersonFragment = EditPersonFragment.newInstance();
+        fragmentTransaction.replace(R.id.content_main, editPersonFragment);
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        fragmentTransaction.addToBackStack(null);
+
+        fragmentTransaction.commit();
+    }
+
+    private void modifyPerson(String personID){
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+
+        EditPersonFragment editPersonFragment = EditPersonFragment.newInstance(personID);
         fragmentTransaction.replace(R.id.content_main, editPersonFragment);
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         fragmentTransaction.addToBackStack(null);

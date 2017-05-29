@@ -2,6 +2,8 @@ package com.domain.codetest_jake_moritz.models;
 
 import org.joda.time.LocalDate;
 
+import java.util.UUID;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
@@ -27,6 +29,37 @@ public class Person extends RealmObject{
     @PrimaryKey
     @Required
     private String personID;
+
+    public Person() {
+    }
+
+    public Person(String firstName, String lastName, String phoneNumber, long dateOfBirth, String dateOfBirthFormatted, String zipCode) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.dateOfBirth = dateOfBirth;
+        this.dateOfBirthFormatted = dateOfBirthFormatted;
+        this.zipCode = zipCode;
+        this.personID = UUID.randomUUID().toString();
+    }
+
+    public Person(String firstName, String lastName, String phoneNumber, long dateOfBirth, String dateOfBirthFormatted, String zipCode, String personID) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.dateOfBirth = dateOfBirth;
+        this.dateOfBirthFormatted = dateOfBirthFormatted;
+        this.zipCode = zipCode;
+        this.personID = personID;
+    }
+
+    public void setDateOfBirthFormatted(String dateOfBirthFormatted) {
+        this.dateOfBirthFormatted = dateOfBirthFormatted;
+    }
+
+    public void setPersonID(String personID) {
+        this.personID = personID;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -73,5 +106,9 @@ public class Person extends RealmObject{
 
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
+    }
+
+    public String getPersonID() {
+        return personID;
     }
 }
