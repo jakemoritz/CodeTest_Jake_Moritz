@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
@@ -39,6 +42,7 @@ public class EditPersonFragment extends Fragment implements DatePickerDialog.OnD
         EditPersonFragment fragment = new EditPersonFragment();
         fragment.mode = mode;
         fragment.setRetainInstance(true);
+        fragment.setHasOptionsMenu(true);
         return fragment;
     }
 
@@ -77,6 +81,22 @@ public class EditPersonFragment extends Fragment implements DatePickerDialog.OnD
         });
 
         return view;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.edit_person_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.save_person:
+                return true;
+            default:
+                return true;
+        }
     }
 
     @Override
