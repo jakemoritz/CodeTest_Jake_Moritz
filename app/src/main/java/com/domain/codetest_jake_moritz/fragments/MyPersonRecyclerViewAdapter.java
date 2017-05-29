@@ -13,11 +13,11 @@ import com.domain.codetest_jake_moritz.models.Person;
 
 import io.realm.RealmRecyclerViewAdapter;
 
-public class MyPersonRecyclerViewAdapter extends RealmRecyclerViewAdapter<Person, MyPersonRecyclerViewAdapter.ViewHolder> {
+class MyPersonRecyclerViewAdapter extends RealmRecyclerViewAdapter<Person, MyPersonRecyclerViewAdapter.ViewHolder> {
 
     private PersonClickListener personClickListener;
 
-    public MyPersonRecyclerViewAdapter(PersonClickListener personClickListener) {
+    MyPersonRecyclerViewAdapter(PersonClickListener personClickListener) {
         super(App.getInstance().getRealm().where(Person.class).findAll(), true);
         this.personClickListener = personClickListener;
     }
@@ -30,7 +30,7 @@ public class MyPersonRecyclerViewAdapter extends RealmRecyclerViewAdapter<Person
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.person = getItem(position);
         holder.nameView.setText(holder.person.getFirstName() + " " + holder.person.getLastName());
         holder.phoneNumberView.setText(holder.person.getPhoneNumber());
@@ -40,20 +40,20 @@ public class MyPersonRecyclerViewAdapter extends RealmRecyclerViewAdapter<Person
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // open dialog to edit Person info
+               personClickListener.onItemClick(null, v, position, v.getId());
             }
         });
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        public final TextView nameView;
-        public final TextView phoneNumberView;
-        public final TextView zipCodeView;
-        public final TextView dateOfBirthView;
-        public Person person;
+    class ViewHolder extends RecyclerView.ViewHolder {
+        final View mView;
+        final TextView nameView;
+        final TextView phoneNumberView;
+        final TextView zipCodeView;
+        final TextView dateOfBirthView;
+        Person person;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
             mView = view;
             nameView = (TextView) view.findViewById(R.id.person_name);
@@ -62,8 +62,6 @@ public class MyPersonRecyclerViewAdapter extends RealmRecyclerViewAdapter<Person
             dateOfBirthView = (TextView) view.findViewById(R.id.person_date_of_birth);
         }
     }
-
-
 
     interface PersonClickListener extends AdapterView.OnItemClickListener{
         @Override

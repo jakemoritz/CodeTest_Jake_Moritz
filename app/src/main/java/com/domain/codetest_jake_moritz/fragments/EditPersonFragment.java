@@ -12,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -149,7 +150,7 @@ public class EditPersonFragment extends Fragment implements DatePickerDialog.OnD
             App.getInstance().getRealm().executeTransaction(new Realm.Transaction() {
                 @Override
                 public void execute(Realm realm) {
-                    Person person = null;
+                    Person person;
 
                     if (personID != null && !personID.isEmpty()) {
                         person = new Person(firstName, lastName, phoneNumber, dateOfBirth, dateOfBirthFormatted, zipCode, personID);
@@ -160,12 +161,48 @@ public class EditPersonFragment extends Fragment implements DatePickerDialog.OnD
                     realm.copyToRealmOrUpdate(person);
                 }
             });
+
+            mainActivity.onBackPressed();
         }
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        closeKeyboard();
+    }
+
+    private void closeKeyboard(){
+
+//        IBinder focusedWindowToken = mainActivity.getCurrentFocus().getWindowToken();
+
+//        if /(focusedWindowToken != null){
+            InputMethodManager imm = (InputMethodManager) mainActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm.isAcceptingText()){
+            imm.hideSoftInputFromWindow(firstNameTextView.getWindowToken(), 0);
+
+        }
+//        }
+    }
+
+    private void deletePerson() {
+        App.getInstance().getRealm().executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                Person person = realm.where(Person.class).equalTo("personID", personID).findFirst();
+                person.deleteFromRealm();
+            }
+        });
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.edit_person_menu, menu);
+        if (mode.matches(EditPersonFragment.MODE_EDIT)) {
+            inflater.inflate(R.menu.edit_person_menu, menu);
+        } else {
+            inflater.inflate(R.menu.new_person_menu, menu);
+        }
+
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -175,8 +212,12 @@ public class EditPersonFragment extends Fragment implements DatePickerDialog.OnD
             case R.id.save_person:
                 savePerson();
                 return true;
+            case R.id.delete_person:
+                deletePerson();
+                return true;
             case android.R.id.home:
                 mainActivity.onBackPressed();
+                return true;
             default:
                 return true;
         }
