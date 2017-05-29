@@ -11,10 +11,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.domain.codetest_jake_moritz.R;
 import com.domain.codetest_jake_moritz.activities.MainActivity;
 import com.domain.codetest_jake_moritz.dialogs.DatePickerFragment;
+
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class EditPersonFragment extends Fragment implements DatePickerDialog.OnDateSetListener{
 
@@ -23,6 +28,8 @@ public class EditPersonFragment extends Fragment implements DatePickerDialog.OnD
 
     private MainActivity mainActivity;
     private String mode;
+
+    private TextView dateOfBirthTextView;
 
     public EditPersonFragment() {
         // Required empty public constructor
@@ -57,10 +64,11 @@ public class EditPersonFragment extends Fragment implements DatePickerDialog.OnD
         actionBar.setTitle(actionBarTitle);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        final LinearLayout dateOfBirthTextView = (LinearLayout) view.findViewById(R.id.new_date_of_birth);
+        LinearLayout dateOfBirthLayout = (LinearLayout) view.findViewById(R.id.new_date_of_birth);
+        dateOfBirthTextView = (TextView) dateOfBirthLayout.findViewById(R.id.new_date_of_birth_text);
 
         final DatePickerDialog.OnDateSetListener callback = this;
-        dateOfBirthTextView.setOnClickListener(new View.OnClickListener() {
+        dateOfBirthLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DatePickerFragment datePickerFragment = DatePickerFragment.newInstance(callback);
@@ -73,7 +81,16 @@ public class EditPersonFragment extends Fragment implements DatePickerDialog.OnD
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        DateFormat birthdayFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.getDefault());
 
+        Calendar birthdayCalendar = Calendar.getInstance();
+        birthdayCalendar.set(Calendar.YEAR, year);
+        birthdayCalendar.set(Calendar.MONTH, month);
+        birthdayCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+        String dateOfBirthFormatted = birthdayFormat.format(birthdayCalendar.getTime());
+
+        dateOfBirthTextView.setText(dateOfBirthFormatted);
     }
 
     @Override
