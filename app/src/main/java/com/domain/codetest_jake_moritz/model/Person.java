@@ -1,4 +1,4 @@
-package com.domain.codetest_jake_moritz.models;
+package com.domain.codetest_jake_moritz.model;
 
 import org.joda.time.LocalDate;
 

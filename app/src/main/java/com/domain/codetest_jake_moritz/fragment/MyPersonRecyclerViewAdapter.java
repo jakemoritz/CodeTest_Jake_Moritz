@@ -1,25 +1,26 @@
-package com.domain.codetest_jake_moritz.fragments;
+package com.domain.codetest_jake_moritz.fragment;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.domain.codetest_jake_moritz.App;
 import com.domain.codetest_jake_moritz.R;
-import com.domain.codetest_jake_moritz.models.Person;
+import com.domain.codetest_jake_moritz.activity.MainActivity;
+import com.domain.codetest_jake_moritz.model.Person;
 
 import io.realm.RealmRecyclerViewAdapter;
 
 class MyPersonRecyclerViewAdapter extends RealmRecyclerViewAdapter<Person, MyPersonRecyclerViewAdapter.ViewHolder> {
 
-    private PersonClickListener personClickListener;
+    private MainActivity mainActivity;
 
-    MyPersonRecyclerViewAdapter(PersonClickListener personClickListener) {
+    MyPersonRecyclerViewAdapter(MainActivity mainActivity) {
         super(App.getInstance().getRealm().where(Person.class).findAll(), true);
-        this.personClickListener = personClickListener;
+        this.mainActivity = mainActivity;
     }
 
     @Override
@@ -30,17 +31,21 @@ class MyPersonRecyclerViewAdapter extends RealmRecyclerViewAdapter<Person, MyPer
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         holder.person = getItem(position);
         holder.nameView.setText(holder.person.getFirstName() + " " + holder.person.getLastName());
         holder.phoneNumberView.setText(holder.person.getPhoneNumber());
         holder.zipCodeView.setText(holder.person.getZipCode());
         holder.dateOfBirthView.setText(String.valueOf(holder.person.getDateOfBirthFormatted()));
 
+        final String personID = holder.person.getPersonID();
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               personClickListener.onItemClick(null, v, position, v.getId());
+                Intent clickIntent = new Intent(mainActivity, MainActivity.class);
+                clickIntent.putExtra("personID", personID);
+                clickIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                mainActivity.startActivity(clickIntent);
             }
         });
     }
@@ -61,10 +66,5 @@ class MyPersonRecyclerViewAdapter extends RealmRecyclerViewAdapter<Person, MyPer
             zipCodeView = (TextView) view.findViewById(R.id.person_zip_code);
             dateOfBirthView = (TextView) view.findViewById(R.id.person_date_of_birth);
         }
-    }
-
-    interface PersonClickListener extends AdapterView.OnItemClickListener{
-        @Override
-        void onItemClick(AdapterView<?> parent, View view, int position, long id);
     }
 }

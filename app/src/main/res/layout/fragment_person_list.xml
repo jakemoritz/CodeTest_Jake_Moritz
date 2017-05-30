@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:scrollbars="vertical"
         app:layoutManager="LinearLayoutManager"
-        tools:context="com.domain.codetest_jake_moritz.fragments.PersonFragment"
+        tools:context="com.domain.codetest_jake_moritz.fragment.PersonFragment"
         tools:listitem="@layout/fragment_person" />
     
     <android.support.design.widget.FloatingActionButton

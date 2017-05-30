@@ -1,4 +1,4 @@
-package com.domain.codetest_jake_moritz.fragments;
+package com.domain.codetest_jake_moritz.fragment;
 
 
 import android.app.DatePickerDialog;
@@ -20,9 +20,9 @@ import android.widget.TextView;
 
 import com.domain.codetest_jake_moritz.App;
 import com.domain.codetest_jake_moritz.R;
-import com.domain.codetest_jake_moritz.activities.MainActivity;
-import com.domain.codetest_jake_moritz.dialogs.DatePickerFragment;
-import com.domain.codetest_jake_moritz.models.Person;
+import com.domain.codetest_jake_moritz.activity.MainActivity;
+import com.domain.codetest_jake_moritz.dialog.DatePickerFragment;
+import com.domain.codetest_jake_moritz.model.Person;
 
 import java.text.DateFormat;
 import java.util.Calendar;

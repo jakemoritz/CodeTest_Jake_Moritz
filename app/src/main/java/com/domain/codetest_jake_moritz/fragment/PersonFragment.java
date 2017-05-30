@@ -1,4 +1,4 @@
-package com.domain.codetest_jake_moritz.fragments;
+package com.domain.codetest_jake_moritz.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,18 +12,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 
 import com.domain.codetest_jake_moritz.App;
 import com.domain.codetest_jake_moritz.R;
-import com.domain.codetest_jake_moritz.activities.MainActivity;
-import com.domain.codetest_jake_moritz.models.Person;
+import com.domain.codetest_jake_moritz.activity.MainActivity;
+import com.domain.codetest_jake_moritz.model.Person;
 
 import java.util.UUID;
 
 import io.realm.Realm;
 
-public class PersonFragment extends Fragment implements MyPersonRecyclerViewAdapter.PersonClickListener {
+public class PersonFragment extends Fragment implements MainActivity.OnItemClick {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
 
@@ -74,9 +73,8 @@ public class PersonFragment extends Fragment implements MyPersonRecyclerViewAdap
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Person person = (Person) parent.getItemAtPosition(position);
-        modifyPerson(person.getPersonID());
+    public void onItemClicked(String personID) {
+        modifyPerson(personID);
     }
 
     @Override
@@ -102,7 +100,7 @@ public class PersonFragment extends Fragment implements MyPersonRecyclerViewAdap
         } else {
             personRecyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
-        personRecyclerView.setAdapter(new MyPersonRecyclerViewAdapter(this));
+        personRecyclerView.setAdapter(new MyPersonRecyclerViewAdapter(mainActivity));
 
         ActionBar actionBar = mainActivity.getSupportActionBar();
         actionBar.setTitle(App.getInstance().getApplicationName());

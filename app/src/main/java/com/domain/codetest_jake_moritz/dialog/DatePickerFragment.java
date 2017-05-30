@@ -1,4 +1,4 @@
-package com.domain.codetest_jake_moritz.dialogs;
+package com.domain.codetest_jake_moritz.dialog;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
