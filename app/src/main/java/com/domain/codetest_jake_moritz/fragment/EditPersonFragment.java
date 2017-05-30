@@ -112,7 +112,7 @@ public class EditPersonFragment extends Fragment implements DatePickerDialog.OnD
         return fragmentLayout;
     }
 
-    private void populateFields(){
+    private void populateFields() {
         Person person = App.getInstance().getRealm().where(Person.class).equalTo("personID", personID).findFirst();
 
         firstNameTextView.setText(person.getFirstName());
@@ -126,7 +126,7 @@ public class EditPersonFragment extends Fragment implements DatePickerDialog.OnD
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if (mode.matches(MODE_EDIT)){
+        if (mode.matches(MODE_EDIT)) {
             populateFields();
         }
     }
@@ -192,17 +192,12 @@ public class EditPersonFragment extends Fragment implements DatePickerDialog.OnD
         closeKeyboard();
     }
 
-    private void closeKeyboard(){
-
-//        IBinder focusedWindowToken = mainActivity.getCurrentFocus().getWindowToken();
-
-//        if /(focusedWindowToken != null){
-            InputMethodManager imm = (InputMethodManager) mainActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (imm.isAcceptingText()){
+    private void closeKeyboard() {
+        InputMethodManager imm = (InputMethodManager) mainActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm.isAcceptingText()) {
             imm.hideSoftInputFromWindow(firstNameTextView.getWindowToken(), 0);
 
         }
-//        }
     }
 
     private void deletePerson() {
@@ -213,6 +208,8 @@ public class EditPersonFragment extends Fragment implements DatePickerDialog.OnD
                 person.deleteFromRealm();
             }
         });
+
+        mainActivity.onBackPressed();
     }
 
     @Override

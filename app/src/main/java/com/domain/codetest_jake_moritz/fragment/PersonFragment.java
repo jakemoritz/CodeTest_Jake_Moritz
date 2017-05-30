@@ -114,7 +114,7 @@ public class PersonFragment extends Fragment implements MainActivity.OnItemClick
 
         EditPersonFragment editPersonFragment = EditPersonFragment.newInstance();
         fragmentTransaction.replace(R.id.content_main, editPersonFragment);
-        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         fragmentTransaction.addToBackStack(null);
 
         fragmentTransaction.commit();
@@ -125,7 +125,7 @@ public class PersonFragment extends Fragment implements MainActivity.OnItemClick
 
         EditPersonFragment editPersonFragment = EditPersonFragment.newInstance(personID);
         fragmentTransaction.replace(R.id.content_main, editPersonFragment);
-        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         fragmentTransaction.addToBackStack(null);
 
         fragmentTransaction.commit();
