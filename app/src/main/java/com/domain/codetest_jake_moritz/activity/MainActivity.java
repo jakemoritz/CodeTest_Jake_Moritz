@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_main, personFragment)
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .commit();
     }
 

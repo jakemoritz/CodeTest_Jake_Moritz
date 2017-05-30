@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -41,14 +43,16 @@ public class EditPersonFragment extends Fragment implements DatePickerDialog.OnD
 
     private View fragmentLayout;
     private TextView dateOfBirthTextView;
-    private TextView firstNameTextView;
-    private TextView lastNameTextView;
-    private TextView zipCodeTextView;
-    private TextView phoneNumberTextView;
+    private EditText firstNameTextView;
+    private EditText lastNameTextView;
+    private EditText zipCodeTextView;
+    private EditText phoneNumberTextView;
 
     private String personID;
     private long dateOfBirth;
     private String dateOfBirthFormatted;
+
+    private String phoneNumberLastChar = " ";
 
     public EditPersonFragment() {
         // Required empty public constructor
@@ -99,6 +103,31 @@ public class EditPersonFragment extends Fragment implements DatePickerDialog.OnD
         lastNameTextView = (EditText) fragmentLayout.findViewById(R.id.new_last_name_text);
         zipCodeTextView = (EditText) fragmentLayout.findViewById(R.id.new_zip_code_text);
         phoneNumberTextView = (EditText) fragmentLayout.findViewById(R.id.new_phone_number_text);
+
+        phoneNumberTextView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                int digits = phoneNumberTextView.getText().toString().length();
+                if (digits > 1) {
+                    phoneNumberLastChar = phoneNumberTextView.getText().toString().substring(digits - 1);
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                int digits = phoneNumberTextView.getText().toString().length();
+                if (!phoneNumberLastChar.equals("-")) {
+                    if (digits == 3 || digits == 7) {
+                        phoneNumberTextView.append("-");
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         final DatePickerDialog.OnDateSetListener callback = this;
         dateOfBirthLayout.setOnClickListener(new View.OnClickListener() {
