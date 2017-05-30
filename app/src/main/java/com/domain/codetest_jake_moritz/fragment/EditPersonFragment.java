@@ -4,6 +4,7 @@ package com.domain.codetest_jake_moritz.fragment;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
@@ -109,6 +110,25 @@ public class EditPersonFragment extends Fragment implements DatePickerDialog.OnD
         });
 
         return fragmentLayout;
+    }
+
+    private void populateFields(){
+        Person person = App.getInstance().getRealm().where(Person.class).equalTo("personID", personID).findFirst();
+
+        firstNameTextView.setText(person.getFirstName());
+        lastNameTextView.setText(person.getLastName());
+        zipCodeTextView.setText(person.getZipCode());
+        phoneNumberTextView.setText(person.getPhoneNumber());
+        dateOfBirthTextView.setText(person.getDateOfBirthFormatted());
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        if (mode.matches(MODE_EDIT)){
+            populateFields();
+        }
     }
 
     private void savePerson() {
