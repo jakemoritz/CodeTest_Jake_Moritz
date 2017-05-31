@@ -1,11 +1,13 @@
 <resources>
-    <string name="app_name">CodeTest_Jake_Moritz</string>
+    <string name="app_name">Jake_Moritz_CodeTest</string>
 
     <string name="zip_code">Zip code</string>
     <string name="date_of_birth">Date of birth</string>
     <string name="phone_number">Phone number</string>
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
+
+    <string name="empty_view_text">No people found</string>
 
     <string name="save">Save</string>
     <string name="delete">Delete</string>

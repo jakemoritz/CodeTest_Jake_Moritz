@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/new_person_icon_height"
             android:layout_marginEnd="@dimen/new_person_icon_margin_right"
-            android:src="@drawable/ic_label"
+            android:src="@drawable/ic_person"
             android:tint="@color/icon_tint_gray" />
 
         <EditText
@@ -48,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/new_person_icon_height"
             android:layout_marginEnd="@dimen/new_person_icon_margin_right"
-            android:src="@drawable/ic_label"
+            android:src="@drawable/ic_person"
             android:tint="@color/icon_tint_gray" />
 
         <EditText
