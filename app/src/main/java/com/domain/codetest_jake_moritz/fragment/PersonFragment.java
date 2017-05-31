@@ -12,7 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 
 import com.domain.codetest_jake_moritz.App;
 import com.domain.codetest_jake_moritz.R;
@@ -33,7 +33,7 @@ public class PersonFragment extends Fragment implements MainActivity.OnPersonCli
     private MainActivity mainActivity;
 
     private RecyclerView personRecyclerView;
-    private TextView emptyView;
+    private LinearLayout emptyView;
 
     public PersonFragment() {
     }
@@ -104,7 +104,7 @@ public class PersonFragment extends Fragment implements MainActivity.OnPersonCli
         View view = inflater.inflate(R.layout.fragment_person_list, container, false);
 
         personRecyclerView = (RecyclerView) view.findViewById(R.id.list);
-        emptyView = (TextView) view.findViewById(R.id.empty_view);
+        emptyView = (LinearLayout) view.findViewById(R.id.empty_view);
 
         FloatingActionButton addNewPersonFab = (FloatingActionButton) view.findViewById(R.id.new_person_fab);
         final PersonFragment parentFragment = this;
