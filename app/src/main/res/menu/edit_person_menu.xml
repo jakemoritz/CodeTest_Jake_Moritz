@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/save_person"
         android:icon="@drawable/ic_action_save"
-        android:title="Save"
+        android:title="@string/save"
         app:showAsAction="ifRoom"
         android:orderInCategory="1"/>
     <item android:id="@+id/delete_person"
-        android:title="Delete"
+        android:title="@string/delete"
         app:showAsAction="ifRoom"
         android:orderInCategory="0"
         android:icon="@drawable/ic_delete"/>

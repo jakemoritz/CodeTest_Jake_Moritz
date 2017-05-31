@@ -10,26 +10,26 @@
         android:id="@+id/new_first_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="@dimen/new_text_view_margin_right"
+        android:layout_marginBottom="@dimen/new_text_view_margin_bottom"
+        android:layout_marginEnd="@dimen/new_text_view_margin_right"
+        android:layout_marginStart="@dimen/new_text_view_margin_left"
+        android:layout_marginTop="@dimen/new_text_view_margin_top"
         android:orientation="horizontal">
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="24dp"
-            android:layout_marginRight="5dp"
+            android:layout_height="@dimen/new_person_icon_height"
+            android:layout_marginEnd="@dimen/new_person_icon_margin_right"
             android:src="@drawable/ic_label"
             android:tint="@color/icon_tint_gray" />
 
         <EditText
+            android:id="@+id/new_first_name_text"
             style="@style/Base.TextAppearance.AppCompat.Subhead"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#00000000"
-            android:hint="First name"
-            android:id="@+id/new_first_name_text"
+            android:background="@color/new_person_textview_background"
+            android:hint="@string/first_name"
             android:inputType="textPersonName" />
 
     </LinearLayout>
@@ -38,27 +38,26 @@
         android:id="@+id/new_last_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="@dimen/new_text_view_margin_right"
-
-        android:layout_marginTop="15dp"
+        android:layout_marginBottom="@dimen/new_text_view_margin_bottom"
+        android:layout_marginEnd="@dimen/new_text_view_margin_right"
+        android:layout_marginStart="@dimen/new_text_view_margin_left"
+        android:layout_marginTop="@dimen/new_text_view_margin_top"
         android:orientation="horizontal">
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="24dp"
-            android:layout_marginRight="5dp"
+            android:layout_height="@dimen/new_person_icon_height"
+            android:layout_marginEnd="@dimen/new_person_icon_margin_right"
             android:src="@drawable/ic_label"
             android:tint="@color/icon_tint_gray" />
 
         <EditText
+            android:id="@+id/new_last_name_text"
             style="@style/Base.TextAppearance.AppCompat.Subhead"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#00000000"
-            android:hint="Last name"
-            android:id="@+id/new_last_name_text"
+            android:background="@color/new_person_textview_background"
+            android:hint="@string/last_name"
             android:inputType="textPersonName" />
 
     </LinearLayout>
@@ -67,29 +66,28 @@
         android:id="@+id/new_phone_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="@dimen/new_text_view_margin_right"
-
-        android:layout_marginTop="15dp"
+        android:layout_marginBottom="@dimen/new_text_view_margin_bottom"
+        android:layout_marginEnd="@dimen/new_text_view_margin_right"
+        android:layout_marginStart="@dimen/new_text_view_margin_left"
+        android:layout_marginTop="@dimen/new_text_view_margin_top"
         android:orientation="horizontal">
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="24dp"
-            android:layout_marginRight="5dp"
+            android:layout_height="@dimen/new_person_icon_height"
+            android:layout_marginEnd="@dimen/new_person_icon_margin_right"
             android:src="@drawable/ic_call"
             android:tint="@color/icon_tint_gray" />
 
         <EditText
+            android:id="@+id/new_phone_number_text"
             style="@style/Base.TextAppearance.AppCompat.Subhead"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#00000000"
-            android:id="@+id/new_phone_number_text"
-            android:hint="Phone number"
-            android:maxLength="12"
-            android:inputType="phone" />
+            android:background="@color/new_person_textview_background"
+            android:hint="@string/phone_number"
+            android:inputType="phone"
+            android:maxLength="12" />
 
     </LinearLayout>
 
@@ -97,28 +95,28 @@
         android:id="@+id/new_zip_code"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="@dimen/new_text_view_margin_right"
-
+        android:layout_marginBottom="@dimen/new_text_view_margin_bottom"
+        android:layout_marginEnd="@dimen/new_text_view_margin_right"
+        android:layout_marginStart="@dimen/new_text_view_margin_left"
+        android:layout_marginTop="@dimen/new_text_view_margin_top"
         android:orientation="horizontal">
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="24dp"
-            android:layout_marginRight="5dp"
+            android:layout_height="@dimen/new_person_icon_height"
+            android:layout_marginEnd="@dimen/new_person_icon_margin_right"
             android:src="@drawable/ic_map"
             android:tint="@color/icon_tint_gray" />
 
         <EditText
+            android:id="@+id/new_zip_code_text"
             style="@style/Base.TextAppearance.AppCompat.Subhead"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#00000000"
-            android:hint="Zip code"
-            android:id="@+id/new_zip_code_text"
-            android:inputType="number" />
+            android:background="@color/new_person_textview_background"
+            android:hint="@string/zip_code"
+            android:inputType="number"
+            android:maxLength="7" />
 
     </LinearLayout>
 
@@ -126,27 +124,26 @@
         android:id="@+id/new_date_of_birth"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
-        android:layout_marginRight="@dimen/new_text_view_margin_right"
-
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginBottom="@dimen/new_text_view_margin_bottom"
+        android:layout_marginEnd="@dimen/new_text_view_margin_right"
+        android:layout_marginStart="@dimen/new_text_view_margin_left"
+        android:layout_marginTop="@dimen/new_text_view_margin_top"
         android:orientation="horizontal">
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="24dp"
-            android:layout_marginRight="5dp"
+            android:layout_height="@dimen/new_person_icon_height"
+            android:layout_marginEnd="@dimen/new_person_icon_margin_right"
             android:src="@drawable/ic_event"
             android:tint="@color/icon_tint_gray" />
 
         <TextView
+            android:id="@+id/new_date_of_birth_text"
             style="@style/Base.TextAppearance.AppCompat.Subhead"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/new_date_of_birth_text"
-            android:background="#00000000"
-            android:hint="Date of birth" />
+            android:background="@color/new_person_textview_background"
+            android:hint="@string/date_of_birth" />
 
     </LinearLayout>
 </LinearLayout>

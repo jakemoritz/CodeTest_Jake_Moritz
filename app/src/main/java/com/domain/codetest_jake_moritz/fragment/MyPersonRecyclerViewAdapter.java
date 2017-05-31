@@ -7,19 +7,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.domain.codetest_jake_moritz.App;
 import com.domain.codetest_jake_moritz.R;
 import com.domain.codetest_jake_moritz.activity.MainActivity;
 import com.domain.codetest_jake_moritz.model.Person;
 
 import io.realm.RealmRecyclerViewAdapter;
+import io.realm.RealmResults;
 
 class MyPersonRecyclerViewAdapter extends RealmRecyclerViewAdapter<Person, MyPersonRecyclerViewAdapter.ViewHolder> {
 
     private MainActivity mainActivity;
 
-    MyPersonRecyclerViewAdapter(MainActivity mainActivity) {
-        super(App.getInstance().getRealm().where(Person.class).findAll(), true);
+    MyPersonRecyclerViewAdapter(MainActivity mainActivity, RealmResults<Person> persons) {
+        super(persons, true);
         this.mainActivity = mainActivity;
     }
 

@@ -1,6 +1,5 @@
 package com.domain.codetest_jake_moritz.activity;
 
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,7 +9,7 @@ import com.domain.codetest_jake_moritz.fragment.PersonFragment;
 
 public class MainActivity extends AppCompatActivity {
 
-    private OnItemClick onItemClick;
+    private OnPersonClickListener onPersonClickListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         PersonFragment personFragment = PersonFragment.newInstance(1);
-        onItemClick = personFragment;
+        onPersonClickListener = personFragment;
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_main, personFragment)
@@ -31,11 +30,11 @@ public class MainActivity extends AppCompatActivity {
 
         if (intent.hasExtra("personID") && !intent.getStringExtra("personID").isEmpty()){
             String personID = intent.getStringExtra("personID");
-            onItemClick.onItemClicked(personID);
+            onPersonClickListener.onPersonClicked(personID);
         }
     }
 
-    public interface OnItemClick {
-        void onItemClicked(String personID);
+    public interface OnPersonClickListener {
+        void onPersonClicked(String personID);
     }
 }

@@ -16,7 +16,15 @@
         android:scrollbars="vertical"
         app:layoutManager="LinearLayoutManager"
         tools:context="com.domain.codetest_jake_moritz.fragment.PersonFragment"
-        tools:listitem="@layout/fragment_person" />
+        android:layout_marginTop="5dp"
+        tools:listitem="@layout/fragment_person"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/empty_view"
+        android:gravity="center"
+        android:text="Empty"/>
     
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"

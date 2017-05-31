@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.domain.codetest_jake_moritz.App;
 import com.domain.codetest_jake_moritz.R;
@@ -21,13 +22,18 @@ import com.domain.codetest_jake_moritz.model.Person;
 import java.util.UUID;
 
 import io.realm.Realm;
+import io.realm.RealmChangeListener;
+import io.realm.RealmResults;
 
-public class PersonFragment extends Fragment implements MainActivity.OnItemClick {
+public class PersonFragment extends Fragment implements MainActivity.OnPersonClickListener, RealmChangeListener<RealmResults<Person>> {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
 
     private int mColumnCount = 1;
     private MainActivity mainActivity;
+
+    private RecyclerView personRecyclerView;
+    private TextView emptyView;
 
     public PersonFragment() {
     }
@@ -46,10 +52,25 @@ public class PersonFragment extends Fragment implements MainActivity.OnItemClick
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        generateDummyInfo();
+//        generateDummyInfo();
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
+    }
+
+    private void setVisibility(RealmResults<Person> persons){
+        if (persons.isEmpty()){
+            personRecyclerView.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+        } else {
+            personRecyclerView.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onChange(RealmResults<Person> persons) {
+        setVisibility(persons);
     }
 
     private void generateDummyInfo() {
@@ -73,7 +94,7 @@ public class PersonFragment extends Fragment implements MainActivity.OnItemClick
     }
 
     @Override
-    public void onItemClicked(String personID) {
+    public void onPersonClicked(String personID) {
         modifyPerson(personID);
     }
 
@@ -82,7 +103,8 @@ public class PersonFragment extends Fragment implements MainActivity.OnItemClick
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_person_list, container, false);
 
-        RecyclerView personRecyclerView = (RecyclerView) view.findViewById(R.id.list);
+        personRecyclerView = (RecyclerView) view.findViewById(R.id.list);
+        emptyView = (TextView) view.findViewById(R.id.empty_view);
 
         FloatingActionButton addNewPersonFab = (FloatingActionButton) view.findViewById(R.id.new_person_fab);
         final PersonFragment parentFragment = this;
@@ -100,7 +122,12 @@ public class PersonFragment extends Fragment implements MainActivity.OnItemClick
         } else {
             personRecyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
-        personRecyclerView.setAdapter(new MyPersonRecyclerViewAdapter(mainActivity));
+
+        RealmResults<Person> persons = App.getInstance().getRealm().where(Person.class).findAll();
+        persons.addChangeListener(this);
+        setVisibility(persons);
+
+        personRecyclerView.setAdapter(new MyPersonRecyclerViewAdapter(mainActivity, persons));
 
         ActionBar actionBar = mainActivity.getSupportActionBar();
         actionBar.setTitle(App.getInstance().getApplicationName());
