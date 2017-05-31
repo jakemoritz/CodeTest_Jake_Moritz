@@ -52,7 +52,7 @@ public class PersonFragment extends Fragment implements MainActivity.OnPersonCli
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        generateDummyInfo();
+        generateDummyInfo();
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
@@ -83,6 +83,7 @@ public class PersonFragment extends Fragment implements MainActivity.OnPersonCli
                         person.setFirstName("John");
                         person.setLastName("Smith");
                         person.setDateOfBirth(1495577645663L);
+                        person.setDateOfBirthFormatted("May 31, 2017");
                         person.setPhoneNumber("555-555-5555");
 
                         int zipCode = (int) (Math.random() * 99999 + 10000);

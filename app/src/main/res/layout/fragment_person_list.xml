@@ -15,7 +15,6 @@
         android:layout_height="match_parent"
         android:layout_marginTop="5dp"
         android:scrollbars="vertical"
-        android:visibility="gone"
         app:layoutManager="LinearLayoutManager"
         tools:context="com.domain.codetest_jake_moritz.fragment.PersonFragment"
         tools:listitem="@layout/fragment_person" />
