@@ -149,6 +149,9 @@ public class EditPersonFragment extends Fragment implements DatePickerDialog.OnD
         zipCodeTextView.setText(person.getZipCode());
         phoneNumberTextView.setText(person.getPhoneNumber());
         dateOfBirthTextView.setText(person.getDateOfBirthFormatted());
+
+        dateOfBirth = person.getDateOfBirth();
+        dateOfBirthFormatted = person.getDateOfBirthFormatted();
     }
 
     @Override

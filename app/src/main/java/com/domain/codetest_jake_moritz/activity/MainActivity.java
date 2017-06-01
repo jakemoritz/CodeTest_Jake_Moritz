@@ -1,6 +1,7 @@
 package com.domain.codetest_jake_moritz.activity;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -22,6 +23,18 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_main, personFragment)
                 .commit();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+/*        PersonFragment personFragment = PersonFragment.newInstance(2);
+        onPersonClickListener = personFragment;
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.content_main, personFragment)
+                .commit();*/
     }
 
     @Override
