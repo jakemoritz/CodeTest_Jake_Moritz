@@ -136,25 +136,30 @@ public class EditPersonFragment extends Fragment implements DatePickerDialog.OnD
     }
 
     private void populateFields() {
-        Person person = App.getInstance().getRealm().where(Person.class).equalTo("personID", personID).findFirst();
+        if (mode.matches(MODE_EDIT)){
+            Person person = App.getInstance().getRealm().where(Person.class).equalTo("personID", personID).findFirst();
 
-        firstNameTextView.setText(person.getFirstName());
-        lastNameTextView.setText(person.getLastName());
-        zipCodeTextView.setText(person.getZipCode());
-        phoneNumberTextView.setText(person.getPhoneNumber());
-        dateOfBirthTextView.setText(person.getDateOfBirthFormatted());
+            firstNameTextView.setText(person.getFirstName());
+            lastNameTextView.setText(person.getLastName());
+            zipCodeTextView.setText(person.getZipCode());
+            phoneNumberTextView.setText(person.getPhoneNumber());
+            dateOfBirthTextView.setText(person.getDateOfBirthFormatted());
 
-        dateOfBirth = person.getDateOfBirth();
-        dateOfBirthFormatted = person.getDateOfBirthFormatted();
+            dateOfBirth = person.getDateOfBirth();
+            dateOfBirthFormatted = person.getDateOfBirthFormatted();
+        } else {
+            if (dateOfBirth != 0L && dateOfBirthFormatted != null){
+                dateOfBirthTextView.setText(dateOfBirthFormatted);
+            }
+        }
+
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if (mode.matches(MODE_EDIT)) {
-            populateFields();
-        }
+        populateFields();
     }
 
     private void savePerson() {
