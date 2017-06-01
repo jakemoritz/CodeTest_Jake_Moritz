@@ -1,7 +1,6 @@
 package com.domain.codetest_jake_moritz.activity;
 
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -17,24 +16,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        PersonFragment personFragment = PersonFragment.newInstance(1);
-        onPersonClickListener = personFragment;
+        if (savedInstanceState == null){
+            PersonFragment personFragment = PersonFragment.newInstance(1);
+            onPersonClickListener = personFragment;
 
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content_main, personFragment)
-                .commit();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_main, personFragment)
+                    .commit();
+        } else {
+            onPersonClickListener = (OnPersonClickListener) getSupportFragmentManager().getFragment(savedInstanceState, "onPersonClickListener");
+        }
     }
 
+
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
 
-/*        PersonFragment personFragment = PersonFragment.newInstance(2);
-        onPersonClickListener = personFragment;
-
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content_main, personFragment)
-                .commit();*/
+        getSupportFragmentManager().putFragment(outState, "onPersonClickListener", (PersonFragment) onPersonClickListener);
     }
 
     @Override

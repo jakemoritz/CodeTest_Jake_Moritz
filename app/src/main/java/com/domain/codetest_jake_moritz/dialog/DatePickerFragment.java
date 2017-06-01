@@ -31,4 +31,14 @@ public class DatePickerFragment extends DialogFragment {
 
         return new DatePickerDialog(getActivity(), listener, year, month, day);
     }
+
+    @Override
+    public void onDestroyView() {
+        Dialog dialog = getDialog();
+
+        if (dialog != null & getRetainInstance()){
+            dialog.setDismissMessage(null);
+        }
+        super.onDestroyView();
+    }
 }
