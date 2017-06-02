@@ -19,13 +19,10 @@ import com.domain.codetest_jake_moritz.R;
 import com.domain.codetest_jake_moritz.activity.MainActivity;
 import com.domain.codetest_jake_moritz.model.Person;
 
-import java.util.UUID;
-
-import io.realm.Realm;
 import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
 
-public class PersonFragment extends Fragment implements MainActivity.OnPersonClickListener, RealmChangeListener<RealmResults<Person>> {
+public class PersonListFragment extends Fragment implements MainActivity.OnPersonClickListener, RealmChangeListener<RealmResults<Person>> {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
 
@@ -35,12 +32,12 @@ public class PersonFragment extends Fragment implements MainActivity.OnPersonCli
     private RecyclerView personRecyclerView;
     private LinearLayout emptyView;
 
-    public PersonFragment() {
+    public PersonListFragment() {
     }
 
     @SuppressWarnings("unused")
-    public static PersonFragment newInstance(int columnCount) {
-        PersonFragment fragment = new PersonFragment();
+    public static PersonListFragment newInstance(int columnCount) {
+        PersonListFragment fragment = new PersonListFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -52,12 +49,12 @@ public class PersonFragment extends Fragment implements MainActivity.OnPersonCli
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        generateDummyInfo();
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
     }
 
+    // Handles toggling empty view
     private void setVisibility(RealmResults<Person> persons){
         if (persons.isEmpty()){
             personRecyclerView.setVisibility(View.GONE);
@@ -73,27 +70,6 @@ public class PersonFragment extends Fragment implements MainActivity.OnPersonCli
         setVisibility(persons);
     }
 
-    private void generateDummyInfo() {
-        if (App.getInstance().getRealm().where(Person.class).findAll().size() == 0) {
-            for (int i = 0; i < 15; i++) {
-                App.getInstance().getRealm().executeTransaction(new Realm.Transaction() {
-                    @Override
-                    public void execute(Realm realm) {
-                        Person person = realm.createObject(Person.class, UUID.randomUUID().toString());
-                        person.setFirstName("John");
-                        person.setLastName("Smith");
-                        person.setDateOfBirth(1495577645663L);
-                        person.setDateOfBirthFormatted("May 31, 2017");
-                        person.setPhoneNumber("555-555-5555");
-
-                        int zipCode = (int) (Math.random() * 99999 + 10000);
-                        person.setZipCode(String.valueOf(zipCode));
-                    }
-                });
-            }
-        }
-    }
-
     @Override
     public void onPersonClicked(String personID) {
         modifyPerson(personID);
@@ -107,8 +83,9 @@ public class PersonFragment extends Fragment implements MainActivity.OnPersonCli
         personRecyclerView = (RecyclerView) view.findViewById(R.id.list);
         emptyView = (LinearLayout) view.findViewById(R.id.empty_view);
 
+        // Set OnClickListener for FAB for creating a new Person
         FloatingActionButton addNewPersonFab = (FloatingActionButton) view.findViewById(R.id.new_person_fab);
-        final PersonFragment parentFragment = this;
+        final PersonListFragment parentFragment = this;
         addNewPersonFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,6 +101,7 @@ public class PersonFragment extends Fragment implements MainActivity.OnPersonCli
             personRecyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
 
+        // Create change listener for Person data, used in checking whether to show empty view
         RealmResults<Person> persons = App.getInstance().getRealm().where(Person.class).findAll();
         persons.addChangeListener(this);
         setVisibility(persons);

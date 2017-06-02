@@ -28,12 +28,12 @@ public class DatePickerFragment extends DialogFragment {
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
 
-
         return new DatePickerDialog(getActivity(), listener, year, month, day);
     }
 
     @Override
     public void onDestroyView() {
+        // Handles bug where DialogFragment is dismissed on rotation
         Dialog dialog = getDialog();
 
         if (dialog != null & getRetainInstance()){

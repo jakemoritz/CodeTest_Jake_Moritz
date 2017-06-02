@@ -10,6 +10,7 @@ import io.realm.annotations.Required;
 
 public class Person extends RealmObject{
 
+    // Annotation denotes whether Realm requires these fields when creating a Person object
     @Required
     private String firstName;
 
@@ -21,6 +22,7 @@ public class Person extends RealmObject{
 
     private long dateOfBirth;
 
+    @Required
     private String dateOfBirthFormatted;
 
     @Required
@@ -40,6 +42,8 @@ public class Person extends RealmObject{
         this.dateOfBirth = dateOfBirth;
         this.dateOfBirthFormatted = dateOfBirthFormatted;
         this.zipCode = zipCode;
+
+        // Generate unique Person ID using UUID
         this.personID = UUID.randomUUID().toString();
     }
 

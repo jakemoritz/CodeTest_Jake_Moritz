@@ -42,6 +42,7 @@ class MyPersonRecyclerViewAdapter extends RealmRecyclerViewAdapter<Person, MyPer
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Send intent to MainActivity to pass Person ID to OnPersonClickListener
                 Intent clickIntent = new Intent(mainActivity, MainActivity.class);
                 clickIntent.putExtra("personID", personID);
                 clickIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
