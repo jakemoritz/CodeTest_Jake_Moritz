@@ -1,7 +1,5 @@
 package com.domain.codetest_jake_moritz.model;
 
-import org.joda.time.LocalDate;
-
 import java.util.UUID;
 
 import io.realm.RealmObject;
@@ -57,20 +55,8 @@ public class Person extends RealmObject{
         this.personID = personID;
     }
 
-    public void setDateOfBirthFormatted(String dateOfBirthFormatted) {
-        this.dateOfBirthFormatted = dateOfBirthFormatted;
-    }
-
-    public void setPersonID(String personID) {
-        this.personID = personID;
-    }
-
     public String getFirstName() {
         return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
     }
 
     public String getLastName() {
@@ -81,35 +67,16 @@ public class Person extends RealmObject{
         return dateOfBirthFormatted;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     public String getPhoneNumber() {
         return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 
     public long getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(long dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-
-        LocalDate date = new LocalDate(dateOfBirth);
-        this.dateOfBirthFormatted = date.toString();
-    }
-
     public String getZipCode() {
         return zipCode;
-    }
-
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
     }
 
     public String getPersonID() {
