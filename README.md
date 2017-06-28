@@ -1,8 +1,11 @@
 # CodeTest_Jake_Moritz
+
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE)
 [![API](https://img.shields.io/badge/API-21%2B-green.svg?style=flat)](https://android-arsenal.com/api?level=21)
 
 Android code test for Service Fusion
+
+![icon](/app/src/main/res/mipmap-xhdpi/ic_launcher.png)
 
 ## Built With
 - [Realm](https://realm.io/products/realm-mobile-database/) - Database
